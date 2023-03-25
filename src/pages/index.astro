@@ -4,10 +4,13 @@ import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="React Projects">
-    <h1>
-        These are some random React projects I'm making.
-    </h1>
-    <section>
-        <a href="./UserCards"></a>
-    </section>
-</Layout>
+    <main class="grid center w-screen h-screen content-center text-center">
+
+        <h1>
+            These are some random React projects I'm making.
+        </h1>
+        <section class="grid lg:grid-cols-2 grid-cols-1">
+            <a href="./UserCards" class="text-blue-800 text-3xl underline lg:col-span-2">User Cards</a>
+        </section>
+    </main>
+    </Layout>
