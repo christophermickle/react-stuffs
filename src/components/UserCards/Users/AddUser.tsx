@@ -1,11 +1,24 @@
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
+import { v4 as uuidv4} from 'uuid'
 import Button from '../UI/Button'
 import Card from '../UI/Card'
 
-const AddUser = (props) => {
+type uuidv4 = () => string
+
+interface User {
+    id: uuidv4| string;
+    username: string;
+    age: number;
+}
+
+const AddUser = (props:any) => {
+    const [user, setUser] = useState<User>({id:'',username:'',age:NaN})
+    const [enteredUsername, setEnteredUsername] = useState('')
+    const [enteredAge, setEnteredAge] = useState(NaN)
   const addUserHandler = (event: FormEvent) => {
     event.preventDefault()
-  }
+    setUser({id: uuidv4(), username:enteredUsername,age:enteredAge})
+}
 
   return (
     <Card>
@@ -16,6 +29,7 @@ const AddUser = (props) => {
           <span className="">Username</span>
         </label>
         <input
+          onChange={(e)=>setEnteredUsername(e.target.value)}
           id="username"
           type="text"
           placeholder="Enter username"
@@ -27,6 +41,7 @@ const AddUser = (props) => {
           Age (years)
         </label>
         <input
+        onChange={(e)=>setEnteredAge(parseInt(e.target.value))}
           id="age"
           type="number"
           placeholder="e.g. 28"
@@ -34,6 +49,7 @@ const AddUser = (props) => {
         />
         <Button type="submit">Add User</Button>
       </form>
+      {user.username && <p>{`Welcome ${user.username} I see that you entered your age as ${user.age} You have been assigned an id of ${user.id}`}</p>}
     </Card>
   )
 }
